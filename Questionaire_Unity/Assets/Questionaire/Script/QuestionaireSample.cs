@@ -2,17 +2,17 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class UtilityMethod : MonoBehaviour
+using Questionaire;
+
+public class QuestionaireSample : MonoBehaviour
 {
+
+    private QBuilder qBuilder;
+
     // Start is called before the first frame update
     void Start()
     {
-        
+        qBuilder = new QBuilder();
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 }

@@ -1,0 +1,138 @@
+[
+    {
+      "ChoiceID": "stamping_database_01",
+      "UniqueID": "stamping_id_01",
+      "MainValue": "儀表板檢查",
+      "Constraint": "",
+      "Effect": "",
+      "NextStep": "stamping_anime_07"
+    },
+    {
+      "ChoiceID": "stamping_database_01",
+      "UniqueID": "stamping_id_02",
+      "MainValue": "沖壓按鈕檢查",
+      "Constraint": "",
+      "Effect": "",
+      "NextStep": "stamping_03"
+    },
+    {
+      "ChoiceID": "stamping_database_01",
+      "UniqueID": "stamping_id_03",
+      "MainValue": "安全裝置檢查",
+      "Constraint": "",
+      "Effect": "",
+      "NextStep": "stamping_anime_10"
+    },
+    {
+      "ChoiceID": "stamping_database_01",
+      "UniqueID": "stamping_id_04",
+      "MainValue": "檢查完成",
+      "Constraint": "",
+      "Effect": "",
+      "NextStep": ""
+    },
+    {
+      "ChoiceID": "stamping_database_02",
+      "UniqueID": "stamping_id_07",
+      "MainValue": "油壓",
+      "Constraint": "",
+      "Effect": "stamping_variable_01 = 0",
+      "NextStep": "stamping_01"
+    },
+    {
+      "ChoiceID": "stamping_database_02",
+      "UniqueID": "stamping_id_08",
+      "MainValue": "超負荷",
+      "Constraint": "",
+      "Effect": "stamping_variable_01 = 1",
+      "NextStep": "stamping_01"
+    },
+    {
+      "ChoiceID": "stamping_database_02",
+      "UniqueID": "stamping_id_09",
+      "MainValue": "一切正常",
+      "Constraint": "",
+      "Effect": "stamping_variable_01 = 0",
+      "NextStep": "stamping_01"
+    },
+    {
+      "ChoiceID": "stamping_database_03",
+      "UniqueID": "stamping_id_10",
+      "MainValue": "單手按壓",
+      "Constraint": "",
+      "Effect": "",
+      "NextStep": "stamping_anime_08"
+    },
+    {
+      "ChoiceID": "stamping_database_03",
+      "UniqueID": "stamping_id_11",
+      "MainValue": "雙手持續按壓",
+      "Constraint": "",
+      "Effect": "",
+      "NextStep": "stamping_anime_09"
+    },
+    {
+      "ChoiceID": "stamping_database_04",
+      "UniqueID": "stamping_id_12",
+      "MainValue": "正常",
+      "Constraint": "",
+      "Effect": "stamping_variable_02 = 0",
+      "NextStep": "stamping_03"
+    },
+    {
+      "ChoiceID": "stamping_database_04",
+      "UniqueID": "stamping_id_13",
+      "MainValue": "異常",
+      "Constraint": "",
+      "Effect": "stamping_variable_02 = 1",
+      "NextStep": "stamping_03"
+    },
+    {
+      "ChoiceID": "stamping_database_05",
+      "UniqueID": "stamping_id_14",
+      "MainValue": "正常",
+      "Constraint": "",
+      "Effect": "stamping_variable_03 = 0",
+      "NextStep": "stamping_03"
+    },
+    {
+      "ChoiceID": "stamping_database_05",
+      "UniqueID": "stamping_id_15",
+      "MainValue": "異常",
+      "Constraint": "",
+      "Effect": "stamping_variable_03 = 1",
+      "NextStep": "stamping_03"
+    },
+    {
+      "ChoiceID": "stamping_database_06",
+      "UniqueID": "stamping_id_16",
+      "MainValue": "正常",
+      "Constraint": "",
+      "Effect": "stamping_variable_04 = 0",
+      "NextStep": "stamping_01"
+    },
+    {
+      "ChoiceID": "stamping_database_06",
+      "UniqueID": "stamping_id_17",
+      "MainValue": "異常 : 沒有燈號",
+      "Constraint": "",
+      "Effect": "stamping_variable_04 = 0",
+      "NextStep": "stamping_01"
+    },
+    {
+      "ChoiceID": "stamping_database_06",
+      "UniqueID": "stamping_id_18",
+      "MainValue": "異常 : 機器沒有停",
+      "Constraint": "",
+      "Effect": "stamping_variable_04 =1",
+      "NextStep": "stamping_01"
+    },
+    {
+      "ChoiceID": "stamping_database_06",
+      "UniqueID": "stamping_id_19",
+      "MainValue": "異常 : 沒有看到光電感應器",
+      "Constraint": "",
+      "Effect": "stamping_variable_04 = 0",
+      "NextStep": "stamping_01"
+    }
+  ]
