@@ -12,7 +12,11 @@ public class QuestionaireSample : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        qBuilder = new QBuilder();
+        qBuilder = new QBuilder().OnComplete(OnBuilderReady);
+    }
+
+    void OnBuilderReady() {
+        //qBuilder.ProcessTicket("stamping_01");
     }
 
 }
