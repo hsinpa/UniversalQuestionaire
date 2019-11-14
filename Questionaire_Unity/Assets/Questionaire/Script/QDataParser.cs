@@ -9,33 +9,34 @@ namespace Questionaire
 {
     public class QDataParser
     {
-        string[] RawEventStats;
-        string RawChoicePath;
-        string RawExaminationPath;
+        string[] RawEventJSONArray;
+        string RawChoiceJSON;
+        string RawExaminationJSON;
        
         public QDataParser(string[] EventStatsPath, string ChoicePath, string ExaminationPath)
         {
             int eventStatCount = EventStatsPath.Length;
 
-            RawEventStats = new string[eventStatCount];
+            RawEventJSONArray = new string[eventStatCount];
 
             for (int i = 0; i < eventStatCount; i++) {
-                RawEventStats[i] = Resources.Load<TextAsset>(EventStatsPath[i]).text;
+                RawEventJSONArray[i] = Resources.Load<TextAsset>(EventStatsPath[i]).text;
             }
 
-            RawChoicePath = Resources.Load<TextAsset>(ChoicePath).text;
-            RawExaminationPath = Resources.Load<TextAsset>(ExaminationPath).text;
+            RawChoiceJSON = Resources.Load<TextAsset>(ChoicePath).text;
+            RawExaminationJSON = Resources.Load<TextAsset>(ExaminationPath).text;
         }
 
         public async Task<ParseResult> Parse() {
             ParseResult parseResult = new ParseResult();
 
-            if (RawEventStats == null || this.RawChoicePath == null || this.RawExaminationPath == null) return parseResult;
+            if (RawEventJSONArray == null || this.RawChoiceJSON == null || this.RawExaminationJSON == null) return parseResult;
 
             await Task.Run(() =>
             {
-                parseResult.EventStats = ParseStatsArray<EventStats>(RawEventStats);
-                parseResult.ChoiceStats = ParseStats<ChoiceStats>(RawChoicePath);
+                parseResult.EventStats = ParseStatsArray<EventStats>(RawEventJSONArray);
+                parseResult.ChoiceStats = ParseStats<ChoiceStats>(RawChoiceJSON);
+                parseResult.ExaminationStats = ParseStats<ChoiceStats>(RawExaminationJSON);
             });
 
             Reset();
@@ -66,15 +67,15 @@ namespace Questionaire
         }
 
         public struct ParseResult {
-            public List<ChoiceStats> ChoiceStats;
             public List<EventStats> EventStats;
-            public List<ExaminationStats> ExaminationStats;
+            public List<ChoiceStats> ChoiceStats;
+            public List<ChoiceStats> ExaminationStats;
         }
 
         private void Reset() {
-            RawEventStats = null;
-            RawChoicePath = null;
-            RawExaminationPath = null;
+            RawEventJSONArray = null;
+            RawChoiceJSON = null;
+            RawExaminationJSON = null;
         }
 
     }

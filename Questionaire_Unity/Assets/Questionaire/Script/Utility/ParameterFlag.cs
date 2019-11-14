@@ -11,7 +11,7 @@ namespace Questionaire
             public const string End = "End";
             public const string Image = "Image";
             public const string Examination = "Examination";
-            public const string Choice = "Choice";
+            public const string Question = "Question";
         }
 
         public class StaticEventID {
@@ -19,10 +19,9 @@ namespace Questionaire
         }
 
         public class DatabasePath {
-            public const string StampingEventStats = "Database/StampingEventStats";
+            public const string StampingEventStats = "Database/EventDatabase";
             public const string ChoiceStats = "Database/ChoiceDatabse";
-            public const string ExaminationStats = "Database/ChoiceDatabse";
-
+            public const string ExaminationStats = "Database/ExaminationDatabase";
         }
 
     }

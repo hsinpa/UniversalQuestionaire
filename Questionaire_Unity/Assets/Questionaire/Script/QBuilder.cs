@@ -10,7 +10,7 @@ namespace Questionaire {
         private QModel _qmodel;
         private QDataParser _qDataParser;
         private QProcessor _qProcessor;
-
+    
         private System.Action OnBuildReady;
 
         public QBuilder() {
@@ -27,12 +27,24 @@ namespace Questionaire {
             return this;
         }
 
-        public Ticket ProcessChoice(ChoiceStats pick_choice)
+        //Begin of story
+        public Ticket StartFromBeginning()
         {
             if (_qProcessor == null) return default(Ticket);
-            return _qProcessor.ProcessChoice(pick_choice);
+
+            Reset();
+
+            return _qProcessor.ProcessNextEvent(ParameterFlag.StaticEventID.Menu);
         }
 
+        //Pass the choice user pick
+        public Ticket ProcessChoice(Ticket ticket, ChoiceStats pick_choice)
+        {
+            if (_qProcessor == null) return default(Ticket);
+            return _qProcessor.ProcessChoice(ticket, pick_choice);
+        }
+
+        //Pass current ticket, in order to get the next one
         public Ticket ProcessTicket(Ticket ticket)
         {
             if (_qProcessor == null) return default(Ticket);
@@ -40,8 +52,15 @@ namespace Questionaire {
             return _qProcessor.ProcessTicket(ticket);
         }
 
+        public List<string> GetFailMessageList() {
+            return _qmodel.GetRecordFailMessage();
+        }
+
+        /// <summary>
+        /// Erase all save record
+        /// </summary>
         public void Reset() {
-            
+            _qmodel.Reset();
         }
         #endregion
 

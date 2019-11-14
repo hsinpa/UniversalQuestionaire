@@ -25,7 +25,7 @@ namespace Questionaire
         /// <returns></returns>
         public bool CheckConstraint(string p_raw_constraint)
         {
-            bool isValid = true;
+            bool isValid = false;
 
             //if EMPTY == true 
             if (string.IsNullOrEmpty(p_raw_constraint)) return true;
@@ -52,6 +52,8 @@ namespace Questionaire
                 int m_value = FindTraitValue(trait_id);
 
                 isValid = Utility.UtilityMethod.AnalyzeStringOperator(operator_string, c_value, m_value);
+
+                Debug.Log("Constraint " + operator_string + ", " + c_value + ", " + m_value);
 
                 //first element and the constraint fail, break loop
                 if (i <= 0 && isValid == false)
@@ -80,7 +82,10 @@ namespace Questionaire
             return isValid;
         }
 
-
+        /// <summary>
+        /// Add effect variable to save dictionary
+        /// </summary>
+        /// <param name="p_raw_effect"></param>
         public void ImplementEffect(string p_raw_effect)
         {
             if (string.IsNullOrEmpty(p_raw_effect)) return;
@@ -111,7 +116,7 @@ namespace Questionaire
             }
         }
 
-        public int FindTraitValue(string trait_id) {
+        private int FindTraitValue(string trait_id) {
             if (ScoreDict.TryGetValue(trait_id, out int score)) {
                 return score;
             }
@@ -121,6 +126,37 @@ namespace Questionaire
 
         public bool IsChoiceSelected(string choice_id, string unique_id) {
             return SelecteChoiceRecord.Count(x => x.selectedChoice.ChoiceID == choice_id && x.selectedChoice.UniqueID == unique_id) > 0;
+        }
+
+        //Insert a record to dictionary
+        public void RecordChoice(ChoiceStats selectedChoice, EventStats choiceEvent)
+        {
+            ImplementEffect(selectedChoice.Effect);
+
+            if (!IsChoiceSelected(selectedChoice.ChoiceID, selectedChoice.UniqueID)) {
+                ChoiceRecord choiceRecord = new ChoiceRecord();
+                choiceRecord.selectedChoice = selectedChoice;
+                choiceRecord.choiceEvent = choiceEvent;
+
+                SelecteChoiceRecord.Add(choiceRecord);
+            }
+        }
+
+        public List<string> GetRecordFailMessage() {
+            List<string> failList = new List<string>();
+
+            int choiceLength = SelecteChoiceRecord.Count;
+
+            //Add Choice / Examination
+            for (int i = 0; i < choiceLength; i++)
+            {
+                if (!string.IsNullOrEmpty(SelecteChoiceRecord[i].selectedChoice.Extra)) {
+                    failList.Add(SelecteChoiceRecord[i].selectedChoice.Extra);
+                }
+            }
+
+
+            return failList;
         }
 
         public struct ChoiceRecord {

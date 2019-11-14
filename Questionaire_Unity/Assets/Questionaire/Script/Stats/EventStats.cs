@@ -9,5 +9,6 @@ namespace Questionaire {
         public string Constraint;
         public string Effect;
         public string NextStop;
+        public string FallbackStop;
     }
 }
